@@ -1,5 +1,5 @@
 
-# WiseOldMan.Net
+# Wom.Net
 
 A comprehensive .NET wrapper for the WiseOldMan API, providing easy access to Old School RuneScape player tracking and statistics.
 
