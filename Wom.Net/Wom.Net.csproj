@@ -4,7 +4,9 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>1.0.0-rc1</Version>
+        <PackageReadmeFile>../README.md</PackageReadmeFile>
+        <PackageLicenseFile>../LICENSE.md</PackageLicenseFile>
+        <Version>1.0.0-rc2</Version>
     </PropertyGroup>
 
     <ItemGroup>
