@@ -1,0 +1,30 @@
+name: Publish, and release Wom.Net
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches: [main]
+    types: [closed]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build
+      run: dotnet build --configuration Release ./Wom.Net/Wom.Net.csproj
+
+    - name: Pack
+      run: dotnet pack --configuration Release --no-build --output nupkgs ./Wom.Net/Wom.Net.csproj
+
+    - name: Push to NuGet
+      run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_SECRET }} --source https://api.nuget.org/v3/index.json
