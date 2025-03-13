@@ -5,8 +5,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageReadmeFile>LICENSE.md</PackageReadmeFile>
-        <Version>1.0.0-rc2</Version>
+        <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+        <Version>1.0.1-rc2</Version>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\net8.0\Wom.Net.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>

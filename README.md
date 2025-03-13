@@ -29,9 +29,11 @@ dotnet add package Wom.Net
 ## Quick Start
 
 ```csharp
+using Functional.Sharp.Monads;
 using Wom.Net;
 using Wom.Net.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Wom.Net.Services.Players.Entities;
 
 // Setup dependency injection
 var services = new ServiceCollection();
@@ -42,8 +44,11 @@ var serviceProvider = services.BuildServiceProvider();
 var womClient = serviceProvider.GetRequiredService<IWiseOldManService>();
 
 // Search for a player
-var player = await womClient.Players.Search("baby spragg");
-Console.WriteLine($"Found player: {player.DisplayName}, Rank: {player.Rank}");
+Result<IEnumerable<Player>> playerSearchResult = await womClient.Players.Search("zezima");
+playerSearchResult.Match(
+    players => Console.WriteLine($"Found {players.Count()} players"),
+    err => Console.WriteLine($"Error searching players: {err.Message}")
+);
 ```
 
 ## Authentication
@@ -64,7 +69,7 @@ services.AddWiseOldMan(options => {
 
 ```csharp
 // Get player details
-var player = await womClient.Players.Search("zezima");
+Result<IEnumerable<Player>> playerSearchResult = await womClient.Players.Search("zezima");
 ```
 
 
@@ -75,8 +80,8 @@ var player = await womClient.Players.Search("zezima");
 The library uses Results instead of exceptions for different API error scenarios:
 
 ```csharp
-var playerResult = await womClient.Players.Search("non-existent-player");
-playerResult.Match(
+Result<PlayerDetails> playerDetailsResult = await womClient.Players.GetPlayerDetails("non-existent-player");
+playerDetailsResult.Match(
 	 player => // use player here,
 	 err => err switch {
 		 NotFoundError => Console.WriteLine($"Player not found: {err.Message}"),
