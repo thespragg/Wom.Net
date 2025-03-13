@@ -22,5 +22,5 @@ public enum PlayerBuild
     /// <summary>10 Hitpoints account build.</summary>
     Hp10,
     /// <summary>Free-to-play level 3 account build.</summary>
-    F2P_Lvl3
+    F2pLvl3
 }

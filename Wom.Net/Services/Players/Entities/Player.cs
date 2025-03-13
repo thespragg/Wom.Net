@@ -8,7 +8,7 @@ namespace Wom.Net.Services.Players.Entities;
 /// Represents a player.
 /// </summary>
 [PublicAPI]
-public sealed record Player
+public record Player
 {
     /// <summary>The player's unique ID.</summary>
     public int Id { get; init; }
@@ -47,7 +47,7 @@ public sealed record Player
     public float Ttm { get; init; }
 
     /// <summary>The player's Time to 200m All in hours.</summary>
-    public float Ttm200M { get; init; }
+    public float Tt200M { get; init; }
 
     /// <summary>The player's registration date.</summary>
     public DateTime RegisteredAt { get; init; }
