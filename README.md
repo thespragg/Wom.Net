@@ -24,7 +24,6 @@ For more info use the [WiseOldMan API Docs](https://docs.wiseoldman.net).
 
 ```
 dotnet add package Wom.Net
-
 ```
 
 ## Quick Start
@@ -45,7 +44,6 @@ var womClient = serviceProvider.GetRequiredService<IWiseOldManService>();
 // Search for a player
 var player = await womClient.Players.Search("baby spragg");
 Console.WriteLine($"Found player: {player.DisplayName}, Rank: {player.Rank}");
-
 ```
 
 ## Authentication
@@ -55,7 +53,7 @@ Providing an API key will increase rate limits, more info can be found here [API
 ```csharp
 services.AddWiseOldMan(options => {
     options.ApiKey = "your-api-key-here"; // Optional
-    options.DiscordUsername = "YourDiscordName"; // Optional for being notified of api changes
+    options.DiscordUsername = "YourDiscordName"; // Optional
 });
 
 ```
