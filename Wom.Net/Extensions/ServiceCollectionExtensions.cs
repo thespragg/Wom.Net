@@ -1,9 +1,11 @@
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Wom.Net.Configuration;
 
 namespace Wom.Net.Extensions;
 
+[PublicAPI]
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddWiseOldMan(

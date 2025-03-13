@@ -1,86 +1,90 @@
+using JetBrains.Annotations;
+
 namespace Wom.Net.Services.Players.Entities;
 
 /// <summary>
 /// Represents skill-specific data.
 /// </summary>
+[PublicAPI]
 public sealed record SkillsData
 {
     /// <summary>Overall skill data.</summary>
-    public SkillData Overall { get; init; }
+    public SkillData Overall { get; init; } = null!;
 
     /// <summary>Attack skill data.</summary>
-    public SkillData Attack { get; init; }
+    public SkillData Attack { get; init; } = null!;
 
     /// <summary>Defence skill data.</summary>
-    public SkillData Defence { get; init; }
+    public SkillData Defence { get; init; } = null!;
 
     /// <summary>Strength skill data.</summary>
-    public SkillData Strength { get; init; }
+    public SkillData Strength { get; init; } = null!;
 
     /// <summary>Hitpoints skill data.</summary>
-    public SkillData Hitpoints { get; init; }
+    public SkillData Hitpoints { get; init; } = null!;
 
     /// <summary>Ranged skill data.</summary>
-    public SkillData Ranged { get; init; }
+    public SkillData Ranged { get; init; } = null!;
 
     /// <summary>Prayer skill data.</summary>
-    public SkillData Prayer { get; init; }
+    public SkillData Prayer { get; init; } = null!;
 
     /// <summary>Magic skill data.</summary>
-    public SkillData Magic { get; init; }
+    public SkillData Magic { get; init; } = null!;
 
     /// <summary>Cooking skill data.</summary>
-    public SkillData Cooking { get; init; }
+    public SkillData Cooking { get; init; } = null!;
 
     /// <summary>Woodcutting skill data.</summary>
-    public SkillData Woodcutting { get; init; }
+    public SkillData Woodcutting { get; init; } = null!;
 
     /// <summary>Fletching skill data.</summary>
-    public SkillData Fletching { get; init; }
+    public SkillData Fletching { get; init; } = null!;
 
     /// <summary>Fishing skill data.</summary>
-    public SkillData Fishing { get; init; }
+    public SkillData Fishing { get; init; } = null!;
 
     /// <summary>Firemaking skill data.</summary>
-    public SkillData Firemaking { get; init; }
+    public SkillData Firemaking { get; init; } = null!;
 
     /// <summary>Crafting skill data.</summary>
-    public SkillData Crafting { get; init; }
+    public SkillData Crafting { get; init; } = null!;
 
     /// <summary>Smithing skill data.</summary>
-    public SkillData Smithing { get; init; }
+    public SkillData Smithing { get; init; } = null!;
 
     /// <summary>Mining skill data.</summary>
-    public SkillData Mining { get; init; }
+    public SkillData Mining { get; init; } = null!;
 
     /// <summary>Herblore skill data.</summary>
-    public SkillData Herblore { get; init; }
+    public SkillData Herblore { get; init; } = null!;
 
     /// <summary>Agility skill data.</summary>
-    public SkillData Agility { get; init; }
+    public SkillData Agility { get; init; } = null!;
 
     /// <summary>Thieving skill data.</summary>
-    public SkillData Thieving { get; init; }
+    public SkillData Thieving { get; init; } = null!;
 
     /// <summary>Slayer skill data.</summary>
-    public SkillData Slayer { get; init; }
+    public SkillData Slayer { get; init; } = null!;
 
     /// <summary>Farming skill data.</summary>
-    public SkillData Farming { get; init; }
+    public SkillData Farming { get; init; } = null!;
 
     /// <summary>Runecrafting skill data.</summary>
-    public SkillData Runecrafting { get; init; }
+    public SkillData Runecrafting { get; init; } = null!;
 
     /// <summary>Hunter skill data.</summary>
-    public SkillData Hunter { get; init; }
+    public SkillData Hunter { get; init; } = null!;
 
     /// <summary>Construction skill data.</summary>
-    public SkillData Construction { get; init; }
+    public SkillData Construction { get; init; } = null!;
 }
 
 /// <summary>
 /// Represents a skill's data.
 /// </summary>
+[PublicAPI]
 public sealed record SkillData
 {
     /// <summary>The skill's metric name.</summary>

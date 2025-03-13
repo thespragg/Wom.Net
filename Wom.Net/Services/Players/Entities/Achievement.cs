@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Wom.Net.Services.Players.Enums;
 
 namespace Wom.Net.Services.Players.Entities;
@@ -5,16 +6,17 @@ namespace Wom.Net.Services.Players.Entities;
 /// <summary>
 /// Represents an achievement.
 /// </summary>
+[PublicAPI]
 public record Achievement
 {
     /// <summary>The parent player's ID.</summary>
     public int PlayerId { get; init; }
 
     /// <summary>The achievement's description or name.</summary>
-    public string Name { get; init; }
+    public string Name { get; init; } = null!;
 
     /// <summary>The achievement's metric (e.g., agility).</summary>
-    public string Metric { get; init; }
+    public string Metric { get; init; } = null!;
 
     /// <summary>The achievement's measure (e.g., experience).</summary>
     public AchievementMeasure Measure { get; init; }

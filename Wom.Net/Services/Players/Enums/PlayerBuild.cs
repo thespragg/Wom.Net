@@ -22,5 +22,6 @@ public enum PlayerBuild
     /// <summary>10 Hitpoints account build.</summary>
     Hp10,
     /// <summary>Free-to-play level 3 account build.</summary>
+    // ReSharper disable once InconsistentNaming
     F2pLvl3
 }

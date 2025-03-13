@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Wom.Net.Services.Players.Enums;
 
 namespace Wom.Net.Services.Players.Entities;
@@ -5,6 +6,7 @@ namespace Wom.Net.Services.Players.Entities;
 /// <summary>
 /// Represents detailed information about a player, extending the base <see cref="Player"/> record.
 /// </summary>
+[PublicAPI]
 public record PlayerDetails : Player
 {
     /// <summary>The player's combat level.</summary>

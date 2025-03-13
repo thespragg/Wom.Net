@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Wom.Net.Services.Players.Enums;
 
 namespace Wom.Net.Services.Players.Entities;
@@ -5,6 +6,7 @@ namespace Wom.Net.Services.Players.Entities;
 /// <summary>
 /// Represents a player annotation.
 /// </summary>
+[PublicAPI]
 public sealed record Annotation
 {
     /// <summary>The annotation's unique ID.</summary>
