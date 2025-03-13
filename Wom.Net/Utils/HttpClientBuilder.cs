@@ -42,17 +42,7 @@ public class HttpClientBuilder(HttpClient httpClient)
     public async Task<HttpResponseMessage> ExecutePostAsync(
         CancellationToken cancellationToken = default
     ) => await _httpClient.PostAsync(BuildUri(), null, cancellationToken);
-
-    public async Task<HttpResponseMessage> ExecutePutAsync<T>(
-        T payload,
-        CancellationToken cancellationToken = default
-    ) => await _httpClient.PutAsJsonAsync(BuildUri(), payload, JsonOptions.Default, cancellationToken);
-
-    public async Task<HttpResponseMessage> ExecutePatchAsync<T>(
-        T payload,
-        CancellationToken cancellationToken = default
-    ) => await _httpClient.PatchAsJsonAsync(BuildUri(), payload, JsonOptions.Default, cancellationToken);
-
+    
     private string BuildUri()
     {
         var uriBuilder = new UriBuilder(_httpClient.BaseAddress!);

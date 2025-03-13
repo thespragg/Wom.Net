@@ -1,8 +1,11 @@
+using JetBrains.Annotations;
+
 namespace Wom.Net.Services.Players.Entities;
 
 /// <summary>
 /// Represents a timeline data point for a player's metric.
 /// </summary>
+[PublicAPI]
 public sealed record TimelineDatapoint
 {
     /// <summary>The player's value for the metric at a specific point in time.</summary>

@@ -1,8 +1,11 @@
+using JetBrains.Annotations;
+
 namespace Wom.Net.Services.Players.Entities;
 
 /// <summary>
 /// Represents a player's progress toward an achievement.
 /// </summary>
+[PublicAPI]
 public sealed record PlayerAchievementProgress : Achievement
 {
     /// <summary>The player's current value for the achievement's metric and measure.</summary>

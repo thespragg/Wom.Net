@@ -1,8 +1,11 @@
+using JetBrains.Annotations;
+
 namespace Wom.Net.Services.Players.Entities;
 
 /// <summary>
 /// Represents a player snapshot.
 /// </summary>
+[PublicAPI]
 public sealed record Snapshot
 {
     /// <summary>The snapshot's unique ID.</summary>
@@ -18,5 +21,5 @@ public sealed record Snapshot
     public DateTime? ImportedAt { get; init; }
 
     /// <summary>The snapshot's data values.</summary>
-    public SnapshotDataValues Data { get; init; }
+    public SnapshotDataValues Data { get; init; } = null!;
 }
