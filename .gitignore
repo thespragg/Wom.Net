@@ -373,3 +373,4 @@ nuget.config
 **/.idea
 
 **/appsettings.custom.json
+.DS_Store

@@ -79,6 +79,9 @@ public sealed record SkillsData
 
     /// <summary>Construction skill data.</summary>
     public SkillData Construction { get; init; } = null!;
+
+    /// <summary>Sailing skill data.</summary>
+    public SkillData Sailing { get; init; } = null!;
 }
 
 /// <summary>
