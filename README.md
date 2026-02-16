@@ -90,6 +90,10 @@ playerDetailsResult.Match(
 );
 ```
 
+## API Coverage
+
+Not all WOM API endpoints are implemented yet. See [MISSING_ENDPOINTS.md](MISSING_ENDPOINTS.md) for a full list of what's still needed.
+
 ## Support
 
 -   [Open an issue](https://github.com/thespragg/Wom.Net/issues)
