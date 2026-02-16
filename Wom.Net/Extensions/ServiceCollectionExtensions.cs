@@ -12,18 +12,18 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddWiseOldMan(
         this IServiceCollection services,
-        Action<WiseOldManConfiguration>? configure = default
+        Action<WiseOldManConfiguration>? configure = null
     )
     {
         var config = new WiseOldManConfiguration();
         configure?.Invoke(config);
 
         var maxRequestsPerMinute = string.IsNullOrEmpty(config.ApiKey) ? 20 : 100;
-        services.AddSingleton(sp =>
-            new RateLimitingHandler(maxRequestsPerMinute, sp.GetRequiredService<ILoggerFactory>().CreateLogger<RateLimitingHandler>()));
+        services.AddSingleton(sp => new RateLimitingHandler(maxRequestsPerMinute, sp.GetRequiredService<ILoggerFactory>().CreateLogger<RateLimitingHandler>()));
 
-        services.AddHttpClient<IWiseOldManService, WiseOldManService>(client =>
+        services.AddHttpClient<IWiseOldManService, WiseOldManService>((sp, client) =>
             {
+                var logger = sp.GetRequiredService<ILogger<WiseOldManService>>();
                 client.BaseAddress = new Uri("https://api.wiseoldman.net/v2/");
 
                 if (!string.IsNullOrEmpty(config.ApiKey))

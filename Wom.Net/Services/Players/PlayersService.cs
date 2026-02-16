@@ -9,8 +9,10 @@ using Wom.Net.Extensions;
 using Wom.Net.Services.Competitions.Entities;
 using Wom.Net.Services.Competitions.Enums;
 using Wom.Net.Services.Groups.Entities;
+using Wom.Net.Services.NameChanges.Entities;
 using Wom.Net.Services.Players.Entities;
 using Wom.Net.Services.Players.Responses;
+using Wom.Net.Services.Records.Entities;
 using Wom.Net.Utils;
 
 namespace Wom.Net.Services.Players;
@@ -21,8 +23,8 @@ internal class PlayersService(HttpClient client, ILogger<PlayersService> logger)
     private static readonly TimeSpan MinUpdateInterval = TimeSpan.FromMinutes(10);
     public async Task<Result<IEnumerable<GetPlayerResponse>>> Search(
         string username,
-        int? limit = default,
-        int? offset = default,
+        int? limit = null,
+        int? offset = null,
         CancellationToken cancellationToken = default
     ) => await Try.ExecuteAsync(async () =>
             await new HttpClientBuilder(client)
@@ -200,5 +202,119 @@ internal class PlayersService(HttpClient client, ILogger<PlayersService> logger)
             .WithQueryParameter("endDate", endDate)
             .ExecuteGetAsync(cancellationToken: cancellationToken)
             .ToTypedResultAsync<PlayerProgressSnapshot>(cancellationToken)
+    ).FlattenAsync();
+
+    public async Task<Result<IEnumerable<Record>>> Records(
+        string username,
+        Period? period = null,
+        string? metric = null,
+        CancellationToken cancellationToken = default
+    ) => await Try.ExecuteAsync(async () =>
+        await new HttpClientBuilder(client)
+            .WithRoute("players")
+            .WithRoute(username)
+            .WithRoute("records")
+            .WithQueryParameter("period", period)
+            .WithQueryParameter("metric", metric)
+            .ExecuteGetAsync(cancellationToken: cancellationToken)
+            .ToTypedResultAsync<IEnumerable<Record>>(cancellationToken)
+    ).FlattenAsync();
+
+    public async Task<Result<IEnumerable<Snapshot>>> Snapshots(
+        string username,
+        Period? period = null,
+        int? limit = null,
+        int? offset = null,
+        CancellationToken cancellationToken = default
+    ) => await Try.ExecuteAsync(async () =>
+        await new HttpClientBuilder(client)
+            .WithRoute("players")
+            .WithRoute(username)
+            .WithRoute("snapshots")
+            .WithQueryParameter("period", period)
+            .WithQueryParameter("limit", limit)
+            .WithQueryParameter("offset", offset)
+            .ExecuteGetAsync(cancellationToken: cancellationToken)
+            .ToTypedResultAsync<IEnumerable<Snapshot>>(cancellationToken)
+    ).FlattenAsync();
+
+    public async Task<Result<IEnumerable<Snapshot>>> Snapshots(
+        string username,
+        DateTime startDate,
+        DateTime endDate,
+        int? limit = null,
+        int? offset = null,
+        CancellationToken cancellationToken = default
+    ) => await Try.ExecuteAsync(async () =>
+        await new HttpClientBuilder(client)
+            .WithRoute("players")
+            .WithRoute(username)
+            .WithRoute("snapshots")
+            .WithQueryParameter("startDate", startDate)
+            .WithQueryParameter("endDate", endDate)
+            .WithQueryParameter("limit", limit)
+            .WithQueryParameter("offset", offset)
+            .ExecuteGetAsync(cancellationToken: cancellationToken)
+            .ToTypedResultAsync<IEnumerable<Snapshot>>(cancellationToken)
+    ).FlattenAsync();
+
+    public async Task<Result<IEnumerable<TimelineDatapoint>>> SnapshotTimeline(
+        string username,
+        string metric,
+        Period? period = null,
+        CancellationToken cancellationToken = default
+    ) => await Try.ExecuteAsync(async () =>
+        await new HttpClientBuilder(client)
+            .WithRoute("players")
+            .WithRoute(username)
+            .WithRoute("snapshots")
+            .WithRoute("timeline")
+            .WithQueryParameter("metric", metric)
+            .WithQueryParameter("period", period)
+            .ExecuteGetAsync(cancellationToken: cancellationToken)
+            .ToTypedResultAsync<IEnumerable<TimelineDatapoint>>(cancellationToken)
+    ).FlattenAsync();
+
+    public async Task<Result<IEnumerable<TimelineDatapoint>>> SnapshotTimeline(
+        string username,
+        string metric,
+        DateTime startDate,
+        DateTime endDate,
+        CancellationToken cancellationToken = default
+    ) => await Try.ExecuteAsync(async () =>
+        await new HttpClientBuilder(client)
+            .WithRoute("players")
+            .WithRoute(username)
+            .WithRoute("snapshots")
+            .WithRoute("timeline")
+            .WithQueryParameter("metric", metric)
+            .WithQueryParameter("startDate", startDate)
+            .WithQueryParameter("endDate", endDate)
+            .ExecuteGetAsync(cancellationToken: cancellationToken)
+            .ToTypedResultAsync<IEnumerable<TimelineDatapoint>>(cancellationToken)
+    ).FlattenAsync();
+
+    public async Task<Result<IEnumerable<NameChange>>> Names(
+        string username,
+        CancellationToken cancellationToken = default
+    ) => await Try.ExecuteAsync(async () =>
+        await new HttpClientBuilder(client)
+            .WithRoute("players")
+            .WithRoute(username)
+            .WithRoute("names")
+            .ExecuteGetAsync(cancellationToken: cancellationToken)
+            .ToTypedResultAsync<IEnumerable<NameChange>>(cancellationToken)
+    ).FlattenAsync();
+
+    public async Task<Result<IEnumerable<PlayerArchive>>> Archives(
+        string username,
+        CancellationToken cancellationToken = default
+    ) => await Try.ExecuteAsync(async () =>
+        await new HttpClientBuilder(client)
+            .WithRoute("players")
+            .WithRoute(username)
+            .WithRoute("archives")
+            .ExecuteGetAsync(cancellationToken: cancellationToken)
+            .ToTypedResultAsync<IEnumerable<PlayerArchive>>(cancellationToken)
     ).FlattenAsync();
 }

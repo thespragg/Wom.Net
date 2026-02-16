@@ -4,7 +4,6 @@ using System.Text.Json;
 using Functional.Sharp.Errors;
 using Functional.Sharp.Extensions;
 using Functional.Sharp.Helpers;
-using Functional.Sharp.Models;
 using Functional.Sharp.Monads;
 using Wom.Net.Configuration;
 using Wom.Net.Errors;

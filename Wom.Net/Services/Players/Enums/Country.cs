@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+// ReSharper disable InconsistentNaming
 
 namespace Wom.Net.Services.Players.Enums;
 

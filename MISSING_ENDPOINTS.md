@@ -3,18 +3,6 @@
 This document tracks the WOM API endpoints that are not yet implemented in Wom.Net.
 For full API documentation, see [docs.wiseoldman.net](https://docs.wiseoldman.net/api).
 
-## Players
-
-The Players service is partially implemented. The following endpoints are still missing:
-
-| Method | Endpoint | Description |
-| ------ | -------- | ----------- |
-| GET | `/players/:username/records` | Get a player's records |
-| GET | `/players/:username/snapshots` | Get a player's snapshots |
-| GET | `/players/:username/snapshots/timeline` | Get a player's snapshot timeline |
-| GET | `/players/:username/names` | Get a player's approved name changes |
-| GET | `/players/:username/archives` | Get a player's archived profiles |
-
 ## Groups
 
 The Groups service has entities scaffolded but no service implementation.
