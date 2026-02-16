@@ -1,6 +1,8 @@
+using System.Collections.Concurrent;
 using Functional.Sharp.Extensions;
 using Functional.Sharp.Helpers;
 using Functional.Sharp.Monads;
+using Microsoft.Extensions.Logging;
 using Wom.Net.Contracts;
 using Wom.Net.Enums;
 using Wom.Net.Extensions;
@@ -13,8 +15,10 @@ using Wom.Net.Utils;
 
 namespace Wom.Net.Services.Players;
 
-internal class PlayersService(HttpClient client) : IPlayersService
+internal class PlayersService(HttpClient client, ILogger<PlayersService> logger) : IPlayersService
 {
+    private static readonly ConcurrentDictionary<string, DateTimeOffset> LastUpdateTimes = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly TimeSpan MinUpdateInterval = TimeSpan.FromMinutes(10);
     public async Task<Result<IEnumerable<GetPlayerResponse>>> Search(
         string username,
         int? limit = default,
@@ -34,13 +38,30 @@ internal class PlayersService(HttpClient client) : IPlayersService
     public async Task<Result<GetPlayerDetailsResponse>> Update(
         string username,
         CancellationToken cancellationToken = default
-    ) => await Try.ExecuteAsync(async () =>
-        await new HttpClientBuilder(client)
-            .WithRoute("players")
-            .WithRoute(username)
-            .ExecutePostAsync(cancellationToken: cancellationToken)
-            .ToTypedResultAsync<GetPlayerDetailsResponse>(cancellationToken)
-    ).FlattenAsync();
+    )
+    {
+        var now = DateTimeOffset.UtcNow;
+
+        if (LastUpdateTimes.TryGetValue(username, out var lastUpdate))
+        {
+            var elapsed = now - lastUpdate;
+            if (elapsed < MinUpdateInterval)
+                logger.LogWarning(
+                    "Player '{Username}' was last updated {Elapsed:F1} minutes ago (< 10 min). " +
+                    "Frequent updates may result in an IP ban. Consider using a longer interval (1-6 hours)",
+                    username, elapsed.TotalMinutes);
+        }
+
+        LastUpdateTimes[username] = now;
+
+        return await Try.ExecuteAsync(async () =>
+            await new HttpClientBuilder(client)
+                .WithRoute("players")
+                .WithRoute(username)
+                .ExecutePostAsync(cancellationToken: cancellationToken)
+                .ToTypedResultAsync<GetPlayerDetailsResponse>(cancellationToken)
+        ).FlattenAsync();
+    }
 
     public async Task<Result<AssertPlayerTypeResponse>> AssertType(
         string username,
@@ -113,7 +134,7 @@ internal class PlayersService(HttpClient client) : IPlayersService
             .WithRoute("players")
             .WithRoute(username)
             .WithRoute("competitions")
-            .WithQueryParameter("status", competitionStatus?.ToString())
+            .WithQueryParameter("status", competitionStatus?.ToString().ToLower())
             .WithQueryParameter("limit", limit)
             .WithQueryParameter("offset", offset)
             .ExecuteGetAsync(cancellationToken: cancellationToken)
