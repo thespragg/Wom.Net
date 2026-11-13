@@ -149,6 +149,9 @@ public sealed record BossesData
     /// <summary>The Corrupted Gauntlet boss data.</summary>
     public BossData TheCorruptedGauntlet { get; init; } = null!;
 
+    /// <summary>The Fractured Archive boss data.</summary>
+    public BossData TheFracturedArchive { get; init; } = null!;
+
     /// <summary>The Hueycoatl boss data.</summary>
     public BossData TheHueycoatl { get; init; } = null!;
 

@@ -7,4 +7,6 @@ namespace Wom.Net;
 public interface IWiseOldManService
 {
     IPlayersService Players { get; } 
+
+    IGroupsService Groups { get; }
 }

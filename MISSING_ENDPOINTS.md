@@ -5,7 +5,7 @@ For full API documentation, see [docs.wiseoldman.net](https://docs.wiseoldman.ne
 
 ## Groups
 
-The Groups service has entities scaffolded but no service implementation.
+The Groups service is partially implemented. `GET /groups/:id/bulk-gained` and `GET /groups/:id/bulk-hiscores` are available; the endpoints below are not.
 
 | Method | Endpoint | Description |
 | ------ | -------- | ----------- |

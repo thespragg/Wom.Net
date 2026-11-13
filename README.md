@@ -72,6 +72,15 @@ services.AddWiseOldMan(options => {
 Result<IEnumerable<Player>> playerSearchResult = await womClient.Players.Search("zezima");
 ```
 
+### Groups
+
+```csharp
+// Get the latest snapshot for every group member
+Result<IEnumerable<GroupBulkHiscoresEntry>> bulkHiscoresResult = await womClient.Groups.BulkHiscores(123);
+
+// Get every metric's gains for every group member
+Result<IEnumerable<GroupBulkGainsEntry>> bulkGainsResult = await womClient.Groups.BulkGains(123, Period.Week);
+```
 
 ## Advanced Configuration
 
